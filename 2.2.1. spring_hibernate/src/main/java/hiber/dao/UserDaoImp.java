@@ -1,5 +1,6 @@
 package hiber.dao;
 
+import hiber.model.Car;
 import hiber.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class UserDaoImp implements UserDao {
 
    @Override
    public void add(User user) {
+      if (user.getCar() != null) {
+         sessionFactory.getCurrentSession().save(user.getCar());
+      }
       sessionFactory.getCurrentSession().save(user);
    }
 
